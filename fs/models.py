@@ -29,3 +29,10 @@ class User_Fan(models.Model):
     name = models.CharField(max_length=70)
     location = models.CharField(max_length=32)
     #need to add password, member since, avatar, confirmed, fav teams
+
+class User_Bar(models.Model):
+    username = models.CharField(max_length=32)
+    name = models.CharField(max_length=70)
+    street_address = models.CharField(max_length=95)
+    city = models.CharField(max_length=35)
+    #need to add password, state, zip, phone_num, member_since, avatar, teams
