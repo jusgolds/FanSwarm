@@ -36,3 +36,18 @@ class User_Bar(models.Model):
     street_address = models.CharField(max_length=95)
     city = models.CharField(max_length=35)
     #need to add password, state, zip, phone_num, member_since, avatar, teams
+
+class Event_Attendence(models.Model):
+    #need to add event, user, user_role
+
+class Event_Role(models.Model):
+    #need to add role
+
+class Bar_Role(models.Model):
+    #need to add role_name
+
+class Fan_Groups(models.Model):
+    #need to add group_name, official
+
+class Events(models.Model):
+    #need to add fan_team, opp_team, date, time, bar, bar role, group 
