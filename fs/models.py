@@ -1,5 +1,9 @@
 from django.db import models
 
+class Fan_Groups(models.Model):
+    group_name = models.CharField(max_length=120)
+    official = models.BooleanField(default=0)
+
 class Sports(models.Model):
     BASKETBALL = 'BB'
     BASEBALL = 'BS'
@@ -26,7 +30,7 @@ class Teams(models.Model):
     team_metro = models.CharField(max_length=120)
     team_league = models.ForeignKey(Leagues, on_delete=models.CASCADE, default=None)
     team_sport = models.ForeignKey(Sports, on_delete=models.CASCADE, default=None)
-    #need to add fan_group
+    #add fan group
 
 class User_Fan(models.Model):
     username = models.CharField(max_length=32)
@@ -55,10 +59,20 @@ class Bar_Role(models.Model):
     )
     role_name = models.CharField(max_length=2, choices=role_choices, default=USER_CREATED)
 
-class Fan_Groups(models.Model):
-    group_name = models.CharField(max_length=120)
-    official = models.BooleanField(default=0)
-
 class Events(models.Model):
     bar = models.ForeignKey(User_Bar, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
+
+class Attendee_Role(models.Model):
+        ORGANIZER = 'OG'
+        ATTENDEE = 'AT'
+        role_choices = (
+            (ORGANIZER, 'Organizer'),
+            (ATTENDEE, 'Attendee'),
+        )
+        role_name = models.CharField(max_length=2, choices=role_choices, default=ORGANIZER)
+
+class Event_Attendence(models.Model):
+    event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
+    user_role = models.ForeignKey(Attendee_Role, on_delete=models.CASCADE, default=None)
+    #need to connect to users 
