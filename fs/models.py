@@ -39,7 +39,21 @@ class User_Bar(models.Model):
     name = models.CharField(max_length=70)
     street_address = models.CharField(max_length=95)
     city = models.CharField(max_length=35)
-    #need to add password, state, zip, phone_num, member_since, avatar, teams
+    state = models.CharField(max_length=2, default=None)
+    zip_code = models.CharField(max_length=5, default=None)
+    phone_num = models.PositiveIntegerField(default=None)
+    #need to add password, member_since, avatar, teams
+
+class Bar_Role(models.Model):
+    USER_CREATED = 'UC'
+    BAR_CREATED = 'BC'
+    GROUP_SPONSORED = 'GS'
+    role_choices = (
+        (USER_CREATED, 'User Created'),
+        (BAR_CREATED, 'Bar Created'),
+        (GROUP_SPONSORED, 'Group Sponsored'),
+    )
+    role_name = models.CharField(max_length=2, choices=role_choices, default=USER_CREATED)
 
 class Fan_Groups(models.Model):
     group_name = models.CharField(max_length=120)
