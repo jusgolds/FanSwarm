@@ -36,6 +36,7 @@ class User_Fan(models.Model):
     username = models.CharField(max_length=32)
     name = models.CharField(max_length=70)
     location = models.CharField(max_length=32)
+    fav_nba = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
     #need to add password, member since, avatar, confirmed, fav teams
 
 class User_Bar(models.Model):
@@ -75,4 +76,4 @@ class Attendee_Role(models.Model):
 class Event_Attendence(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
     user_role = models.ForeignKey(Attendee_Role, on_delete=models.CASCADE, default=None)
-    #need to connect to users 
+    #need to connect to users
