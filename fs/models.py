@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 class Fan_Groups(models.Model):
     group_name = models.CharField(max_length=120)
@@ -36,8 +37,9 @@ class User_Fan(models.Model):
     username = models.CharField(max_length=32)
     name = models.CharField(max_length=70)
     location = models.CharField(max_length=32)
+    member_since = models.DateTimeField(auto_now_add=True)
     fav_nba = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
-    #need to add password, member since, avatar, confirmed, fav teams
+    #need to add password, avatar, confirmed, fav teams
 
 class User_Bar(models.Model):
     username = models.CharField(max_length=32)
@@ -47,7 +49,8 @@ class User_Bar(models.Model):
     state = models.CharField(max_length=2, default=None)
     zip_code = models.CharField(max_length=5, default=None)
     phone_num = models.PositiveIntegerField(default=None)
-    #need to add password, member_since, avatar, teams
+    member_since = models.DateTimeField(auto_now_add=True)
+    #need to add password, avatar, teams
 
 class Bar_Role(models.Model):
     USER_CREATED = 'UC'
