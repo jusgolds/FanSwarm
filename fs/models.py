@@ -76,6 +76,8 @@ class Bar_Role(models.Model):
     role_name = models.CharField(max_length=2, choices=role_choices, default=USER_CREATED)
 
 class Events(models.Model):
+    fan_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
+    opp_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
     bar = models.ForeignKey(User_Bar, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
