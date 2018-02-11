@@ -78,6 +78,8 @@ class Bar_Role(models.Model):
 class Events(models.Model):
     fan_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
     opp_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
+    event_date = models.DateField(default=None)
+    event_time = models.TimeField(default=None)
     bar = models.ForeignKey(User_Bar, on_delete=models.CASCADE, default=None)
     bar_role = models.ForeignKey(Bar_Role, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
