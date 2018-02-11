@@ -38,8 +38,14 @@ class User_Fan(models.Model):
     name = models.CharField(max_length=70)
     location = models.CharField(max_length=32)
     member_since = models.DateTimeField(auto_now_add=True)
+    confirmed = models.BooleanField(default=0)
     fav_nba = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
-    #need to add password, avatar, confirmed, fav teams
+    fav_mlb = models.ForeignKey(Teams, limit_choices_to={'team_league': 2}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_nfl = models.ForeignKey(Teams, limit_choices_to={'team_league': 3}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_nhl = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_epl = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_mls = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
+    #need to add password, avatar, confirmed
 
 class User_Bar(models.Model):
     username = models.CharField(max_length=32)
@@ -56,7 +62,7 @@ class User_Bar(models.Model):
     nhl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
     epl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
     mls_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
-    #need to add password, avatar, teams
+    #need to add password, avatar
 
 class Bar_Role(models.Model):
     USER_CREATED = 'UC'
