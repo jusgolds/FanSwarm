@@ -46,7 +46,6 @@ class User_Fan(models.Model):
     fav_nhl = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_epl = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_mls = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
-    #need to add avatar
 
 class User_Bar(models.Model):
     username = models.CharField(max_length=32)
@@ -64,7 +63,6 @@ class User_Bar(models.Model):
     nhl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
     epl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
     mls_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
-    #need to add avatar
 
 class Bar_Role(models.Model):
     USER_CREATED = 'UC'
