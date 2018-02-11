@@ -50,6 +50,12 @@ class User_Bar(models.Model):
     zip_code = models.CharField(max_length=5, default=None)
     phone_num = models.PositiveIntegerField(default=None)
     member_since = models.DateTimeField(auto_now_add=True)
+    nba_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
+    mlb_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 2}, on_delete=models.CASCADE, default=None, related_name='+')
+    nfl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 3}, on_delete=models.CASCADE, default=None, related_name='+')
+    nhl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
+    epl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
+    mls_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
     #need to add password, avatar, teams
 
 class Bar_Role(models.Model):
