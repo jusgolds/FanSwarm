@@ -31,21 +31,22 @@ class Teams(models.Model):
     team_metro = models.CharField(max_length=120)
     team_league = models.ForeignKey(Leagues, on_delete=models.CASCADE, default=None)
     team_sport = models.ForeignKey(Sports, on_delete=models.CASCADE, default=None)
+    fan_group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
     #add fan group
 
 class User_Fan(models.Model):
     username = models.CharField(max_length=32)
     name = models.CharField(max_length=70)
     location = models.CharField(max_length=32)
-    member_since = models.DateTimeField(auto_now_add=True)
     confirmed = models.BooleanField(default=0)
+    member_since = models.DateTimeField(auto_now_add=True)
     fav_nba = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_mlb = models.ForeignKey(Teams, limit_choices_to={'team_league': 2}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_nfl = models.ForeignKey(Teams, limit_choices_to={'team_league': 3}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_nhl = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_epl = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_mls = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
-    #need to add password, avatar, confirmed
+    #need to add password, avatar
 
 class User_Bar(models.Model):
     username = models.CharField(max_length=32)
