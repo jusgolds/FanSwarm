@@ -98,4 +98,3 @@ class Event_Attendence(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
     user = models.ManyToManyField(User_Fan)
     user_role = models.ForeignKey(Attendee_Role, on_delete=models.CASCADE, default=None)
-    #need to connect to users
