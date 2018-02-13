@@ -84,6 +84,7 @@ class Events(models.Model):
     bar_role = models.ForeignKey(Bar_Role, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
+
 class Attendee_Role(models.Model):
         ORGANIZER = 'OG'
         ATTENDEE = 'AT'
@@ -95,5 +96,6 @@ class Attendee_Role(models.Model):
 
 class Event_Attendence(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
+    user = models.ManyToManyField(User_Fan)
     user_role = models.ForeignKey(Attendee_Role, on_delete=models.CASCADE, default=None)
     #need to connect to users
