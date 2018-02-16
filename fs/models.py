@@ -24,6 +24,7 @@ class Teams(models.Model):
 class User(models.Model):
     username = models.CharField(max_length=32)
     password_hash = models.CharField(max_length=128, default=None)
+    confirmed = models.BooleanField(default=0)
     name = models.CharField(max_length=70)
     user_location = models.CharField(max_length=32)
     street_address = models.CharField(max_length=95)
