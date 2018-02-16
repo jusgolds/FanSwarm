@@ -33,22 +33,6 @@ class Teams(models.Model):
     team_sport = models.ForeignKey(Sports, on_delete=models.CASCADE, default=None)
     fan_group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
-class User_Fan(models.Model):
-    username = models.CharField(max_length=32)
-    password_hash = models.CharField(max_length=128, default=None)
-    name = models.CharField(max_length=70)
-    location = models.CharField(max_length=32)
-    confirmed = models.BooleanField(default=0)
-    member_since = models.DateTimeField(auto_now_add=True)
-    fav_nba = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_mlb = models.ForeignKey(Teams, limit_choices_to={'team_league': 2}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_nfl = models.ForeignKey(Teams, limit_choices_to={'team_league': 3}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_nhl = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_epl = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_mls = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_ncaafb = models.ForeignKey(Teams, limit_choices_to={'team_league': 7}, on_delete=models.CASCADE, default=None, related_name='+')
-    fav_ncaabb = models.ForeignKey(Teams, limit_choices_to={'team_league': 8}, on_delete=models.CASCADE, default=None, related_name='+')
-
 class User(models.Model):
     username = models.CharField(max_length=32)
     password_hash = models.CharField(max_length=128, default=None)
@@ -68,25 +52,6 @@ class User(models.Model):
     fav_mls = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_ncaafb = models.ForeignKey(Teams, limit_choices_to={'team_league': 7}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_ncaabb = models.ForeignKey(Teams, limit_choices_to={'team_league': 8}, on_delete=models.CASCADE, default=None, related_name='+')
-
-class User_Bar(models.Model):
-    username = models.CharField(max_length=32)
-    password_hash = models.CharField(max_length=128, default=None)
-    name = models.CharField(max_length=70)
-    street_address = models.CharField(max_length=95)
-    city = models.CharField(max_length=35)
-    state = models.CharField(max_length=2, default=None)
-    zip_code = models.CharField(max_length=5, default=None)
-    phone_num = models.PositiveIntegerField(default=None)
-    member_since = models.DateTimeField(auto_now_add=True)
-    nba_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
-    mlb_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 2}, on_delete=models.CASCADE, default=None, related_name='+')
-    nfl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 3}, on_delete=models.CASCADE, default=None, related_name='+')
-    nhl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
-    epl_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
-    mls_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
-    ncaafb_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 7}, on_delete=models.CASCADE, default=None, related_name='+')
-    ncaabb_affiliation = models.ForeignKey(Teams, limit_choices_to={'team_league': 8}, on_delete=models.CASCADE, default=None, related_name='+')
 
 class Bar_Role(models.Model):
     USER_CREATED = 'UC'
