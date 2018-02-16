@@ -32,7 +32,7 @@ class User(models.Model):
     zip_code = models.CharField(max_length=5)
     phone_num = models.PositiveIntegerField(default=None)
     member_since = models.DateTimeField(auto_now_add=True)
-    
+
 class Favorite_Teams(models.Model):
     user_id = models.ManyToManyField(User)
     fav_team = models.ManyToManyField(Teams)
@@ -57,17 +57,7 @@ class Events(models.Model):
     bar_role = models.ForeignKey(Bar_Role, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
-
-class Attendee_Role(models.Model):
-        ORGANIZER = 'OG'
-        ATTENDEE = 'AT'
-        role_choices = (
-            (ORGANIZER, 'Organizer'),
-            (ATTENDEE, 'Attendee'),
-        )
-        role_name = models.CharField(max_length=2, choices=role_choices, default=ORGANIZER)
-
 class Event_Attendence(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
     user = models.ManyToManyField(User)
-    user_role = models.ForeignKey(Attendee_Role, on_delete=models.CASCADE, default=None)
+    creator = models.BooleanField(default=0)
