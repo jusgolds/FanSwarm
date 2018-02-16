@@ -104,7 +104,7 @@ class Events(models.Model):
     opp_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
     event_date = models.DateField(default=None)
     event_time = models.TimeField(default=None)
-    bar = models.ForeignKey(User_Bar, on_delete=models.CASCADE, default=None)
+    bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     bar_role = models.ForeignKey(Bar_Role, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
@@ -120,5 +120,5 @@ class Attendee_Role(models.Model):
 
 class Event_Attendence(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
-    user = models.ManyToManyField(User_Fan)
+    user = models.ManyToManyField(User)
     user_role = models.ForeignKey(Attendee_Role, on_delete=models.CASCADE, default=None)
