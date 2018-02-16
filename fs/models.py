@@ -49,6 +49,26 @@ class User_Fan(models.Model):
     fav_ncaafb = models.ForeignKey(Teams, limit_choices_to={'team_league': 7}, on_delete=models.CASCADE, default=None, related_name='+')
     fav_ncaabb = models.ForeignKey(Teams, limit_choices_to={'team_league': 8}, on_delete=models.CASCADE, default=None, related_name='+')
 
+class User(models.Model):
+    username = models.CharField(max_length=32)
+    password_hash = models.CharField(max_length=128, default=None)
+    name = models.CharField(max_length=70)
+    user_location = models.CharField(max_length=32)
+    street_address = models.CharField(max_length=95)
+    city = models.CharField(max_length=35)
+    state = models.CharField(max_length=20)
+    zip_code = models.CharField(max_length=5)
+    phone_num = models.PositiveIntegerField(default=None)
+    member_since = models.DateTimeField(auto_now_add=True)
+    fav_nba = models.ForeignKey(Teams, limit_choices_to={'team_league': 1}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_mlb = models.ForeignKey(Teams, limit_choices_to={'team_league': 2}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_nfl = models.ForeignKey(Teams, limit_choices_to={'team_league': 3}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_nhl = models.ForeignKey(Teams, limit_choices_to={'team_league': 4}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_epl = models.ForeignKey(Teams, limit_choices_to={'team_league': 5}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_mls = models.ForeignKey(Teams, limit_choices_to={'team_league': 6}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_ncaafb = models.ForeignKey(Teams, limit_choices_to={'team_league': 7}, on_delete=models.CASCADE, default=None, related_name='+')
+    fav_ncaabb = models.ForeignKey(Teams, limit_choices_to={'team_league': 8}, on_delete=models.CASCADE, default=None, related_name='+')
+
 class User_Bar(models.Model):
     username = models.CharField(max_length=32)
     password_hash = models.CharField(max_length=128, default=None)
