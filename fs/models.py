@@ -6,19 +6,7 @@ class Fan_Groups(models.Model):
     official = models.BooleanField(default=0)
 
 class Sports(models.Model):
-    BASKETBALL = 'BB'
-    BASEBALL = 'BS'
-    FOOTBALL = 'FB'
-    HOCKEY = 'HY'
-    SOCCER = 'SC'
-    sport_choices = (
-        (BASKETBALL, 'Basketball'),
-        (BASEBALL, 'Baseball'),
-        (FOOTBALL, 'Football'),
-        (HOCKEY, 'Hockey'),
-        (SOCCER, 'Soccer'),
-    )
-    sport_name = models.CharField(max_length=2, choices=sport_choices, default=None)
+    sport_name = models.CharField(max_length=32, default=None)
 
 class Leagues(models.Model):
     league_name = models.CharField(max_length=120)
