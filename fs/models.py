@@ -39,17 +39,6 @@ class Favorite_Teams(models.Model):
     user_id = models.ManyToManyField(User)
     fav_team = models.ManyToManyField(Teams)
 
-class Bar_Role(models.Model):
-    USER_CREATED = 'UC'
-    BAR_CREATED = 'BC'
-    GROUP_SPONSORED = 'GS'
-    role_choices = (
-        (USER_CREATED, 'User Created'),
-        (BAR_CREATED, 'Bar Created'),
-        (GROUP_SPONSORED, 'Group Sponsored'),
-    )
-    role_name = models.CharField(max_length=2, choices=role_choices, default=USER_CREATED)
-
 class Events(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     fan_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
@@ -57,7 +46,6 @@ class Events(models.Model):
     event_date = models.DateField(default=None)
     event_time = models.TimeField(default=None)
     bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name='bar')
-    bar_role = models.ForeignKey(Bar_Role, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
 class Event_Attendence(models.Model):
