@@ -25,6 +25,7 @@ class User(models.Model):
     username = models.CharField(max_length=32)
     password_hash = models.CharField(max_length=128, default=None)
     confirmed = models.BooleanField(default=0)
+    user_type = models.CharField(max_length=32, default=None)
     name = models.CharField(max_length=70)
     user_location = models.CharField(max_length=32)
     street_address = models.CharField(max_length=95)
@@ -50,15 +51,15 @@ class Bar_Role(models.Model):
     role_name = models.CharField(max_length=2, choices=role_choices, default=USER_CREATED)
 
 class Events(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     fan_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
     opp_team = models.ForeignKey(Teams, on_delete=models.CASCADE, default=None, related_name='+')
     event_date = models.DateField(default=None)
     event_time = models.TimeField(default=None)
-    bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name='bar')
     bar_role = models.ForeignKey(Bar_Role, on_delete=models.CASCADE, default=None)
     group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
 
 class Event_Attendence(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=None)
     user = models.ManyToManyField(User)
-    creator = models.BooleanField(default=0)
