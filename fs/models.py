@@ -8,10 +8,16 @@ class Fan_Groups(models.Model):
 class Sports(models.Model):
     sport_name = models.CharField(max_length=32, default=None)
 
+    def __str__(self):
+        return self.sport_name
+
 class Leagues(models.Model):
     league_name = models.CharField(max_length=120)
     abbreviation = models.CharField(max_length=32)
     sport = models.ForeignKey(Sports, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.league_name
 
 class Teams(models.Model):
     team_name = models.CharField(max_length=120)
@@ -19,7 +25,10 @@ class Teams(models.Model):
     team_metro = models.CharField(max_length=120)
     team_league = models.ForeignKey(Leagues, on_delete=models.CASCADE, default=None)
     team_sport = models.ForeignKey(Sports, on_delete=models.CASCADE, default=None)
-    fan_group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, default=None)
+    fan_group = models.ForeignKey(Fan_Groups, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.team_name
 
 class User(models.Model):
     username = models.CharField(max_length=32)
