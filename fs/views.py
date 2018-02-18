@@ -1,7 +1,10 @@
 from django.http import HttpResponse
+from django.views.generic import ListView
+from .models import Team
 
-def index(request):
-    return HttpResponse("Welcome to Fanswarm!")
+class TeamListView(ListView):
+    template_name = 'teams.html'
+    models = Team
 
 def login(request):
     return HttpResponse("This is where someone would login.")
