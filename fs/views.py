@@ -1,10 +1,15 @@
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from .models import Team
 
 class TeamListView(ListView):
     template_name = 'teams.html'
-    models = Team
+    model = Team
+
+class TeamDetailView(DetailView):
+    model = Team
+    slug_field = 'id'
+    slug_url_kwarg = 'team_id'
 
 def login(request):
     return HttpResponse("This is where someone would login.")
