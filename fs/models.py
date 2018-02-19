@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 import datetime
 
 class FanGroup(models.Model):
@@ -32,17 +33,21 @@ class Team(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=32)
+    email = models.CharField(max_length=32, default=None)
     password_hash = models.CharField(max_length=128, default=None)
     confirmed = models.BooleanField(default=0)
     user_type = models.CharField(max_length=32, default=None)
     name = models.CharField(max_length=70)
     user_location = models.CharField(max_length=32)
-    street_address = models.CharField(max_length=95)
-    city = models.CharField(max_length=35)
-    state = models.CharField(max_length=20)
-    zip_code = models.CharField(max_length=5)
-    phone_num = models.PositiveIntegerField(default=None)
+    street_address = models.CharField(max_length=95, blank=True)
+    city = models.CharField(max_length=35, blank=True)
+    state = models.CharField(max_length=20, blank=True)
+    zip_code = models.CharField(max_length=5, blank=True)
+    phone_num = PhoneNumberField(default=None, blank=True)
     member_since = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.username
 
 class FavoriteTeam(models.Model):
     user_id = models.ManyToManyField(User)
