@@ -26,7 +26,6 @@ class Team(models.Model):
     team_metro = models.CharField(max_length=120)
     team_league = models.ForeignKey(League, on_delete=models.CASCADE, default=None)
     team_sport = models.ForeignKey(Sport, on_delete=models.CASCADE, default=None)
-    fan_group = models.ForeignKey(FanGroup, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.team_name
@@ -60,8 +59,8 @@ class Event(models.Model):
     event_date = models.DateField(default=None)
     event_time = models.TimeField(default=None)
     bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name='bar')
-    group = models.ForeignKey(FanGroup, on_delete=models.CASCADE, default=None)
 
 class EventAttendance(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
     user = models.ManyToManyField(User)
+    fan_group = models.ForeignKey(FanGroup, on_delete=models.CASCADE, default=None, blank=True)

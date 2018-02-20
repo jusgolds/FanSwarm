@@ -2,6 +2,9 @@
 
 {% block content %}
 
-<h1>{{ team.team_name }}</h1>
+<h1>{{ team.team_location_name }} {{ team.team_name }}</h1>
+
+<body>The {{ team.team_name }} are located in {{ team.team_metro }} and play {{ team.sport }}
+      in the {{ team.team_league }}.</body>
 
 {% endblock %}

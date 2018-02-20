@@ -8,10 +8,7 @@ urlpatterns = [
     path('login/', TemplateView.as_view(template_name='login.html'), name='login'),
     path('teams/', views.TeamListView.as_view(), name='teams'),
     path('teams/<int:team_id>/', views.TeamDetailView.as_view(), name='team-detail'),
-    path('profile/<int:user_id>/', views.UserDetailView.as_view(), name='user_detail'),
-    path('profile/create', views.user_create, name='user_create'),
-    path('profile/edit', views.user_edit, name='user_edit'),
-    path('events/', views.events, name='events'),
-    path('events/create', views.event_create, name='event_create'),
-    path('events/edit', views.event_edit, name='event_edit'),
+    path('profile/<int:user_id>/', views.UserDetailView.as_view(), name='user-detail'),
+    path('events/', views.EventListView.as_view(), name='events'),
+    path('events/<int:event_id>/', views.EventDetailView.as_view(), name='event-detail'),
 ]
