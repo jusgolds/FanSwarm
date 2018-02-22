@@ -14,7 +14,7 @@ class TeamDetailView(DetailView):
 
 class UserEditView(UpdateView):
     model = User
-    fields = ['email']
+    fields = ['email', 'user_location']
     template_name = 'user_edit.html'
     success_field = '/thanks/'
     slug_field = 'id'
@@ -32,6 +32,14 @@ class EventListView(ListView):
 
 class EventDetailView(DetailView):
     model = Event
+    slug_field = 'id'
+    slug_url_kwarg = 'event_id'
+
+class EventEditView(UpdateView):
+    model = Event
+    fields = ['event_date', 'event_time', 'fan_team', 'opp_team']
+    template_name = 'event_edit.html'
+    success_field = '/thanks/'
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
 

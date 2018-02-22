@@ -9,4 +9,6 @@
   <li>Join us at {{ event.bar }}</li>
 </ul>
 
+<a href="{% url 'event-edit' event_id=event.id %}">Edit</a>
+
 {% endblock %}
