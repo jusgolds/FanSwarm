@@ -22,4 +22,31 @@
   {% endfor %}
 </ul>
 
+<h5>MLB Teams</h5>
+<ul>
+  {% for team in team_list %}
+  {% if team.team_sport_id == 3 %}
+  <li><a href="{% url 'team-detail' team_id=team.id %}">{{ team.team_location_name }} {{ team.team_name }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+<h5>NHL Teams</h5>
+<ul>
+  {% for team in team_list %}
+  {% if team.team_sport_id == 4 %}
+  <li><a href="{% url 'team-detail' team_id=team.id %}">{{ team.team_location_name }} {{ team.team_name }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+<h5>EPL Teams</h5>
+<ul>
+  {% for team in team_list %}
+  {% if team.team_sport_id == 5 %}
+  <li><a href="{% url 'team-detail' team_id=team.id %}">{{ team.team_location_name }} {{ team.team_name }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
 {% endblock %}

@@ -29,6 +29,33 @@
   {% endfor %}
 </ul>
 
+<h3>Favorite MLB Teams</h3>
+<ul>
+  {% for team in user.favorite_teams.all %}
+  {% if team.team_sport_id == 3 %}
+  <li>{{ team }}</li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+<h3>Favorite NHL Teams</h3>
+<ul>
+  {% for team in user.favorite_teams.all %}
+  {% if team.team_sport_id == 4 %}
+  <li>{{ team }}</li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+<h3>Favorite EPL Teams</h3>
+<ul>
+  {% for team in user.favorite_teams.all %}
+  {% if team.team_sport_id == 5 %}
+  <li>{{ team }}</li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
 <a href="{% url 'user-edit' user_id=user.id %}">Edit</a>
 
 {% endblock %}
