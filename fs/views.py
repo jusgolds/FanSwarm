@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from .models import Team, User, Event
 
 class TeamListView(ListView):
@@ -26,9 +26,16 @@ class UserDetailView(DetailView):
     slug_field = 'id'
     slug_url_kwarg = 'user_id'
 
+class EventCreateView(CreateView):
+    model = Event
+    fields = ['fan_team', 'opp_team', 'event_date', 'event_time']
+    template_name = 'create_event.html'
+
 class EventListView(ListView):
     template_name = 'events.html'
     model = Event
+    slug_field = 'id'
+    slug_url_kwarg = 'event_id'
 
 class EventDetailView(DetailView):
     model = Event
