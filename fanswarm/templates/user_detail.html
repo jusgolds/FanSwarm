@@ -11,10 +11,21 @@
   <li>{{ user.member_since }}</li>
 </ul>
 
-<h3>Favorite Teams</h3>
+<h3>Favorite NBA Teams</h3>
 <ul>
   {% for team in user.favorite_teams.all %}
+  {% if team.team_sport_id == 1 %}
   <li>{{ team }}</li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+<h3>Favorite NFL Teams</h3>
+<ul>
+  {% for team in user.favorite_teams.all %}
+  {% if team.team_sport_id == 2 %}
+  <li>{{ team }}</li>
+  {% endif %}
   {% endfor %}
 </ul>
 
