@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, CreateView
+from django.urls import reverse_lazy
 from .models import Team, User, Event
 
 class TeamListView(ListView):
@@ -28,8 +29,14 @@ class UserDetailView(DetailView):
 
 class EventCreateView(CreateView):
     model = Event
-    fields = ['fan_team', 'opp_team', 'event_date', 'event_time']
+    fields = ['fan_team', 'opp_team', 'event_date', 'event_time', 'bar', 'owner']
     template_name = 'create_event.html'
+    success_url = reverse_lazy('events')
+
+    def get_form(self, *args, **kwargs):
+        form = super(EventCreateView, self).get_form(*args, **kwargs)
+        form.fields['bar'].queryset = User.objects.filter(user_type='bar')
+        return form
 
 class EventListView(ListView):
     template_name = 'events.html'
