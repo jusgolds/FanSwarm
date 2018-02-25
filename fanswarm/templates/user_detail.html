@@ -5,17 +5,17 @@
 <h1>{{ user.username }}'s Profile</h1>
 
 <ul>
-  <li>{{ user.name }}</li>
-  <li>{{ user.email }}</li>
-  <li>{{ user.user_location }}</li>
-  <li>{{ user.member_since }}</li>
+  <b>Name: </b>{{ user.name }}</br>
+  <b>Email: </b>{{ user.email }}</br>
+  <b>User Location: </b>{{ user.user_location }}</br>
+  <b>Member Since: </b>{{ user.member_since }}</br>
 </ul>
 
 <h3>Favorite NBA Teams</h3>
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 1 %}
-  <li>{{ team }}</li>
+  <li>{{ team.team_location_name }} {{ team }}</li>
   {% endif %}
   {% endfor %}
 </ul>
@@ -24,7 +24,7 @@
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 2 %}
-  <li>{{ team }}</li>
+  <li>{{ team.team_location_name }} {{ team }}</li>
   {% endif %}
   {% endfor %}
 </ul>
@@ -33,7 +33,7 @@
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 3 %}
-  <li>{{ team }}</li>
+  <li>{{ team.team_location_name }} {{ team }}</li>
   {% endif %}
   {% endfor %}
 </ul>
@@ -42,19 +42,11 @@
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 4 %}
-  <li>{{ team }}</li>
+  <li>{{ team.team_location_name }} {{ team }}</li>
   {% endif %}
   {% endfor %}
 </ul>
 
-<h3>Favorite EPL Teams</h3>
-<ul>
-  {% for team in user.favorite_teams.all %}
-  {% if team.team_sport_id == 5 %}
-  <li>{{ team }}</li>
-  {% endif %}
-  {% endfor %}
-</ul>
 
 <a href="{% url 'user-edit' user_id=user.id %}">Edit</a>
 
