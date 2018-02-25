@@ -17,7 +17,7 @@ class UserEditView(UpdateView):
     model = User
     fields = ['email', 'user_location']
     template_name = 'user_edit.html'
-    success_field = '/thanks/'
+    success_url = '/thanks/'
     slug_field = 'id'
     slug_url_kwarg = 'user_id'
 
