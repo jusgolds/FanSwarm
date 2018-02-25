@@ -6,7 +6,7 @@
 
 <ul>
   {% for event in event_list %}
-  <li><a href="{% url 'event-detail' event_id=event.id %}">{{ event.fan_team }} vs. {{ event.opp_team}}</a></li>
+  <li><a href="{% url 'event-detail' event_id=event.id %}">{{ event.fan_team }} vs. {{ event.opp_team}}</a> on {{ event.event_date }} at {{ event.bar }}</li>
   {% endfor %}
 </ul>
 

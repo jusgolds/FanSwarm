@@ -4,9 +4,21 @@
 
 <h1>Teams</h1>
 
+<h5>NBA Teams</h5>
 <ul>
   {% for team in team_list %}
+  {% if team.team_sport_id == 1 %}
   <li><a href="{% url 'team-detail' team_id=team.id %}">{{ team.team_location_name }} {{ team.team_name }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+<h5>NFL Teams</h5>
+<ul>
+  {% for team in team_list %}
+  {% if team.team_sport_id == 2 %}
+  <li><a href="{% url 'team-detail' team_id=team.id %}">{{ team.team_location_name }} {{ team.team_name }}</a></li>
+  {% endif %}
   {% endfor %}
 </ul>
 
