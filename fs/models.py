@@ -52,6 +52,7 @@ class User(models.Model):
 class FavoriteTeam(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fav_team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    fav_team_league = models.ForeignKey(League, on_delete=models.CASCADE)
 
 class Event(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
