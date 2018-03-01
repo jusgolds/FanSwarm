@@ -6,6 +6,11 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ['email', 'user_location']
 
+class EventCreateForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['fan_team', 'opp_team', 'event_date', 'event_time', 'bar', 'owner']
+
 class EventEditForm(forms.ModelForm):
     class Meta:
         model = Event

@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from .models import Team, User, Event
-from .forms import UserEditForm, EventEditForm
+from .forms import UserEditForm, EventCreateForm, EventEditForm
 
 class TeamListView(ListView):
     template_name = 'teams.html'
@@ -36,7 +36,7 @@ class UserDetailView(DetailView):
 
 class EventCreateView(CreateView):
     model = Event
-    fields = ['fan_team', 'opp_team', 'event_date', 'event_time', 'bar', 'owner']
+    form_class = EventCreateForm
     template_name = 'create_event.html'
     success_url = reverse_lazy('events')
 
