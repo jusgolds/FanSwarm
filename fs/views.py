@@ -8,6 +8,8 @@ from django.contrib import messages
 from .models import Team, User, Event, FavoriteTeam
 from .forms import UserEditForm, EventCreateForm, EventEditForm
 
+import datetime
+
 class TeamListView(ListView):
     template_name = 'teams.html'
     model = Team
@@ -50,6 +52,8 @@ class EventListView(ListView):
     model = Event
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
+    now = datetime.datetime.now()
+    queryset = Event.objects.filter(event_date__gte=now).order_by('event_date')
 
 class EventDetailView(DetailView):
     model = Event
