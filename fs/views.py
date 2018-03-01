@@ -60,9 +60,12 @@ class EventEditView(UpdateView):
     model = Event
     fields = ['event_date', 'event_time', 'fan_team', 'opp_team']
     template_name = 'event_edit.html'
-    success_field = '/thanks/'
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, 'Profile successfully updated.')
+        return reverse_lazy('event-detail', kwargs={'event_id':self.kwargs['event_id']})
 
 def thanks(request):
     return HttpResponse("Thanks!")

@@ -14,6 +14,5 @@ urlpatterns = [
     path('events/', views.EventListView.as_view(), name='events'),
     path('events/create', views.EventCreateView.as_view(), name='event-create'),
     path('events/<int:event_id>/', views.EventDetailView.as_view(), name='event-detail'),
-    path('events/edit/<int:event_id>/', views.EventEditView.as_view(success_url='thanks'), name='event-edit'),
-    path('events/edit/<int:event_id>/thanks/', TemplateView.as_view(template_name='thanks.html'), name='thanks'),
+    path('events/<int:event_id>/edit', views.EventEditView.as_view(), name='event-edit'),
 ]
