@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib import messages
 
-from .models import Team, User, Event
+from .models import Team, User, Event, FavoriteTeam
 from .forms import UserEditForm, EventCreateForm, EventEditForm
 
 class TeamListView(ListView):

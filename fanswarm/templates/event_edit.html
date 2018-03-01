@@ -5,6 +5,7 @@
 <h1>Update Event</h1>
 
 <form action="" method="post">{% csrf_token %}
+    {{ time_form.as_p }}
     {{ form.as_p }}
     <input type="submit" value="Update" />
 
