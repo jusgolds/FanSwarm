@@ -2,7 +2,11 @@ from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy
+from django.shortcuts import render
+from django.contrib import messages
+
 from .models import Team, User, Event
+from .forms import UserEditForm
 
 class TeamListView(ListView):
     template_name = 'teams.html'
@@ -15,11 +19,14 @@ class TeamDetailView(DetailView):
 
 class UserEditView(UpdateView):
     model = User
-    fields = ['email', 'user_location']
+    form_class = UserEditForm
     template_name = 'user_edit.html'
-    success_url = '/thanks/'
     slug_field = 'id'
     slug_url_kwarg = 'user_id'
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, 'Profile successfully updated.')
+        return reverse_lazy('user-detail', kwargs={'user_id':self.kwargs['user_id']})
 
 class UserDetailView(DetailView):
     template_name = 'user_detail.html'
