@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from .models import Team, User, Event
-from .forms import UserEditForm
+from .forms import UserEditForm, EventEditForm
 
 class TeamListView(ListView):
     template_name = 'teams.html'
@@ -58,7 +58,7 @@ class EventDetailView(DetailView):
 
 class EventEditView(UpdateView):
     model = Event
-    fields = ['event_date', 'event_time', 'fan_team', 'opp_team']
+    form_class = EventEditForm
     template_name = 'event_edit.html'
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
