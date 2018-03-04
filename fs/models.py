@@ -49,6 +49,9 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+    def __str__(self):
+        return self.name
+
 class FavoriteTeam(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fav_team = models.ForeignKey(Team, on_delete=models.CASCADE)
