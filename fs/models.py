@@ -44,7 +44,7 @@ class User(models.Model):
     zip_code = models.CharField(max_length=5, blank=True)
     phone_num = PhoneNumberField(default=None, blank=True)
     member_since = models.DateTimeField(auto_now_add=True)
-    favorite_teams = models.ManyToManyField(Team, blank=True, through='FavoriteTeam', related_name='favorite_users')
+    favorite_teams = models.ManyToManyField(Team, blank=True, related_name='favorite_users')
 
     def __str__(self):
         return self.username
@@ -52,10 +52,7 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
-class FavoriteTeam(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fav_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    fav_team_league = models.ForeignKey(League, on_delete=models.CASCADE)
+
 
 class Event(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)

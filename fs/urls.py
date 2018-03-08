@@ -11,6 +11,7 @@ urlpatterns = [
     path('teams/<int:team_id>/', views.TeamDetailView.as_view(), name='team-detail'),
     path('profile/<int:user_id>/', views.UserDetailView.as_view(), name='user-detail'),
     path('profile/<int:user_id>/edit/', views.UserEditView.as_view(), name='user-edit'),
+    path('profile/<int:user_id>/edit/nba/', views.TeamEditView.as_view(), name='user-team-edit'),
     path('events/', views.EventListView.as_view(), name='events'),
     path('events/create', views.EventCreateView.as_view(), name='event-create'),
     path('events/<int:event_id>/', views.EventDetailView.as_view(), name='event-detail'),

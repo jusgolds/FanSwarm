@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, Event
+from .models import User, Event, League
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -11,6 +11,11 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['email', 'user_location']
+
+class TeamEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['favorite_teams']
 
 class EventCreateForm(forms.ModelForm):
     class Meta:

@@ -124,6 +124,12 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend"
 )
 
+TEMPLATE_CONTEXT_PROCESSIRS = (
+    "django.core.context_processors.request",
+    "django.contrib.auth.context_processors.auth",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
 # auth and allauth settings
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNTS_QUERY_EMAIL = True
