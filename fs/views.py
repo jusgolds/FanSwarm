@@ -39,9 +39,26 @@ class TeamEditView(UpdateView):
     slug_url_kwarg = 'user_id'
 
     def get_form(self, *args, **kwargs):
+        form.fields['leagues'].widget = Select(choices=League.objects.only('league_name', 'pk'))
         form = super(TeamEditView, self).get_form(*args, **kwargs)
-        form.fields['favorite_teams'].queryset = Team.objects.filter(team_league=1)
+        form.fields['favorite_teams'].queryset = Team.objects.filter('leagues')
         return form
+
+    def post(self, request, *args, **kwargs):
+        params = dict(request.POST.items())
+        # print the params, find your form in the data
+        print(params)
+        form = params.get('UserEditForm')
+        if not form.is_valid():
+            error_string = 'Bad data, check the form'
+            return HttpResponse(error_string, status=400)
+        # print out the form, find the field
+        # probably called 'id_league' or similar
+        print(form.items())
+        # delete the league field
+        form.pop('league_name')
+        favorite = form.save()
+        return render(self.request, self.template_name, context)
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, 'Teams successfully updated.')

@@ -10,7 +10,7 @@ class TimeInput(forms.TimeInput):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'user_location']
+        fields = ['email', 'user_location', 'favorite_teams']
 
 class TeamEditForm(forms.ModelForm):
     class Meta:
