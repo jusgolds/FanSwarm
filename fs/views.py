@@ -40,7 +40,7 @@ class TeamEditView(UpdateView):
 
     def get_form(self, *args, **kwargs):
         form.fields['leagues'].widget = Select(choices=League.objects.only('league_name', 'pk'))
-        form = super(TeamEditView, self).get_form(*args, **kwargs)
+        form = super(UserEditView, self).get_form(*args, **kwargs)
         form.fields['favorite_teams'].queryset = Team.objects.filter('leagues')
         return form
 

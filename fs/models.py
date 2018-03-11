@@ -18,7 +18,7 @@ class League(models.Model):
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.league_name
+        return self.abbreviation
 
 class Team(models.Model):
     team_name = models.CharField(max_length=120)
