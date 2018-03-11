@@ -4,4 +4,8 @@
 
 <h1>Welcome to FanSwarm!</h1>
 
+{% if user.is_authenticated %}
+<p>Welcome {{ user.username }}!!</p>
+{% endif %}
+
 {% endblock %}
