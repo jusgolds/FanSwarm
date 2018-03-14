@@ -4,6 +4,7 @@ from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib import messages
+from django.forms.widgets import Select
 
 from .models import Team, User, Event, League
 from .forms import UserEditForm, EventCreateForm, EventEditForm, TeamEditForm
@@ -25,6 +26,28 @@ class UserEditView(UpdateView):
     template_name = 'user_edit.html'
     slug_field = 'id'
     slug_url_kwarg = 'user_id'
+
+    def get_form(self, *args, **kwargs):
+        form = super(UserEditView, self).get_form(*args, **kwargs)
+        form.fields['leagues'].queryset = League.objects.all()
+        form.fields['favorite_teams'].queryset = Team.objects.all()
+        return form
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = super(UserEditView, self).get_context_data(**kwargs)
+        params = dict(request.POST.items())
+        params.pop('leagues')
+        params.pop('csrfmiddlewaretoken')
+        teams = params.pop('favorite_teams')
+        #if statement: team.id is in favorite_teams don't do anything, if it isn't there add it
+        form = self.get_form()
+        if not form.is_valid():
+            error_string = 'Bad data, check the form'
+            return HttpResponse(error_string, status=400)
+        user = User.objects.filter(pk=self.object.pk).update(**params)
+        User.objects.get(pk=self.object.pk).favorite_teams.add(teams)
+        return render(self.request, self.template_name, context)
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, 'Profile successfully updated.')
