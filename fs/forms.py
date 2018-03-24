@@ -14,12 +14,12 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ['email', 'user_location', 'leagues', 'favorite_teams']
         widgets = {'favorite_teams': forms.SelectMultiple() }
-        
+
 
 class EventCreateForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['fan_team', 'opp_team', 'event_date', 'event_time', 'bar', 'owner']
+        fields = ['team_league', 'fan_team', 'opp_team', 'event_date', 'event_time', 'bar', 'owner']
         widgets = {
             'event_date': DateInput(),
             'event_time': TimeInput()
@@ -28,7 +28,7 @@ class EventCreateForm(forms.ModelForm):
 class EventEditForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['event_date', 'event_time', 'fan_team', 'opp_team']
+        fields = ['event_date', 'event_time', 'team_league', 'fan_team', 'opp_team']
         widgets = {
             'event_date': DateInput(),
             'event_time': TimeInput()

@@ -58,6 +58,7 @@ class Event(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     fan_team = models.ForeignKey(Team, on_delete=models.CASCADE, default=None, related_name='+')
     opp_team = models.ForeignKey(Team, on_delete=models.CASCADE, default=None, related_name='+')
+    team_league = models.ForeignKey(League, on_delete=models.CASCADE, default=None)
     event_date = models.DateField(default=None)
     event_time = models.TimeField(default=None)
     bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name='bar')
