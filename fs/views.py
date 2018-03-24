@@ -2,12 +2,12 @@ from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.forms.widgets import Select
+from django.forms.widgets import Select, SelectMultiple
 
 from .models import Team, User, Event, League
-from .forms import UserEditForm, EventCreateForm, EventEditForm, TeamEditForm
+from .forms import UserEditForm, EventCreateForm, EventEditForm, TeamEditForm, FavoriteTeamForm
 
 import datetime
 
@@ -34,20 +34,32 @@ class UserEditView(UpdateView):
         return form
 
     def post(self, request, *args, **kwargs):
+        print(request.POST)
         self.object = self.get_object()
         context = super(UserEditView, self).get_context_data(**kwargs)
+        teamids = request.POST.getlist('favorite_teams')
         params = dict(request.POST.items())
         params.pop('leagues')
         params.pop('csrfmiddlewaretoken')
-        teams = params.pop('favorite_teams')
-        #if statement: team.id is in favorite_teams don't do anything, if it isn't there add it
+        params.pop('favorite_teams')
+        fteams = User.objects.get(pk=self.object.pk).favorite_teams.all()
+        print(fteams)
+        ftids = [f.id for f in fteams]
+        removed = [f for f in fteams if f not in teamids]
+        User.objects.get(pk=self.object.pk).favorite_teams.remove(*removed)
+        for t in teamids:
+            if t in ftids:
+                continue
+            else:
+                User.objects.get(pk=self.object.pk).favorite_teams.add(t)
+        #if statement: teaeam.id is in favorite_teams don't do anything, if it isn't there add it
         form = self.get_form()
         if not form.is_valid():
             error_string = 'Bad data, check the form'
             return HttpResponse(error_string, status=400)
         user = User.objects.filter(pk=self.object.pk).update(**params)
-        User.objects.get(pk=self.object.pk).favorite_teams.add(teams)
-        return render(self.request, self.template_name, context)
+        return redirect(self.get_success_url())
+        #return render(self.request, self.template_name, context)
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, 'Profile successfully updated.')
@@ -62,8 +74,8 @@ class TeamEditView(UpdateView):
     slug_url_kwarg = 'user_id'
 
     def get_form(self, *args, **kwargs):
-        form.fields['leagues'].widget = Select(choices=League.objects.only('league_name', 'pk'))
         form = super(UserEditView, self).get_form(*args, **kwargs)
+        form.fields['leagues'].widget = Select(choices=League.objects.only('league_name', 'pk'))
         form.fields['favorite_teams'].queryset = Team.objects.filter('leagues')
         return form
 
