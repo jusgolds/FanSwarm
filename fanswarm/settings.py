@@ -130,6 +130,9 @@ TEMPLATE_CONTEXT_PROCESSIRS = (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 # auth and allauth settings
+
+AUTH_USER_MODEL = 'fs.User'
+
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNTS_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
