@@ -10,6 +10,8 @@
   {% endfor %}
 </ul>
 
+{% if user.is_authenticated %}
 <a href="{% url 'event-create' %}">Create new event!</a>
+{% endif %}
 
 {% endblock %}
