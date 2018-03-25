@@ -9,7 +9,9 @@
 <p><b>{{ event.bar }}</b><br>{{ event.bar.street_address }}<br>{{ event.bar.city }}, {{ event.bar.state }} {{ event.bar.zip_code }}<br>
 {{ event.bar.phone_num }}</p>
 
+{% if user.is_authenticated %}
 <a href="{% url 'event-edit' event_id=event.id %}">Edit</a>
+{% endif %}
 <br>
 <a href="{% url 'events' %}">Back to Events</a>
 
