@@ -72,7 +72,7 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'user_location', 'leagues', 'favorite_teams']
+        fields = ['name', 'email', 'user_location', 'leagues', 'favorite_teams']
         widgets = {'favorite_teams': forms.SelectMultiple() }
 
 
