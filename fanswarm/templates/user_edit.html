@@ -8,7 +8,7 @@ run the snippet that heather sent on click !-->
 
 <h1>Update</h1>
 
-<form action="" method="post">
+<form class="user-edit-form" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Update" />
