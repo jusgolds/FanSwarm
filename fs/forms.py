@@ -171,6 +171,9 @@ class EventCreateForm(forms.ModelForm):
         }
 
 class EventEditForm(forms.ModelForm):
+    fan_team = TeamChoiceField(queryset=Team.objects.all(), widget=CustomSelect())
+    opp_team = TeamChoiceField(queryset=Team.objects.all(), widget=CustomSelect())
+    
     class Meta:
         model = Event
         fields = ['event_date', 'event_time', 'team_league', 'fan_team', 'opp_team']

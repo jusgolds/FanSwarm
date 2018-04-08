@@ -4,9 +4,34 @@
 
 <h1>Update Event</h1>
 
-<form action="" method="post">{% csrf_token %}
+<form class="edit-event-form" action="" method="post">{% csrf_token %}
     {{ time_form.as_p }}
     {{ form.as_p }}
     <input type="submit" value="Update" />
 
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+(function() {
+  const eventEditForm = $('.edit-event-form [name=team_league]')
+
+  function eventEditUpdateSelected(el) {
+    const selected = $(el).find('option:selected').text();
+    const fan_option = '.edit-event-form [name=fan_team] > option';
+    const opp_option = '.edit-event-form [name=opp_team] > option';
+    $(fan_option + '[data-league=' + selected + ']').show();
+    $(fan_option + ':not([data-league=' + selected + '])').hide();
+    $(opp_option + '[data-league=' + selected + ']').show();
+    $(opp_option + ':not([data-league=' + selected + '])').hide();
+  }
+
+  eventEditUpdateSelected(eventEditForm);
+
+  eventEditForm.change(function() {
+      eventEditUpdateSelected(this);
+  });
+})();
+</script>
 {% endblock %}
