@@ -47,6 +47,8 @@
   {% endfor %}
 </ul>
 
-
+{% if user.is_authenticated and request.user.id is user.id %}
 <a href="{% url 'user-edit' user_id=user.id %}">Edit Profile</a>
+{% endif %}
+
 {% endblock %}
