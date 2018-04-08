@@ -81,6 +81,12 @@ class EventCreateView(CreateView):
         form.fields['bar'].queryset = User.objects.filter(user_type='bar')
         return form
 
+    def form_valid(self, form):
+        event = form.save(commit=False)
+        event.user = Event.objects.get(owner_id=self.request.user.pk)
+        event.save()
+        return form
+
 class EventListView(ListView):
     template_name = 'events.html'
     model = Event

@@ -164,7 +164,7 @@ class EventCreateForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = ['team_league', 'fan_team', 'opp_team', 'event_date', 'event_time', 'bar', 'owner']
+        fields = ['team_league', 'fan_team', 'opp_team', 'event_date', 'event_time', 'bar']
         widgets = {
             'event_date': DateInput(),
             'event_time': TimeInput()
