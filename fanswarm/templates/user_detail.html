@@ -4,12 +4,17 @@
 
 <h1>{{ user.username }}'s Profile</h1>
 
+{% if user.is_authenticated and request.user.id is user.id %}
 <ul>
   <b>Name: </b>{{ user.name }}</br>
   <b>Email: </b>{{ user.email }}</br>
   <b>User Location: </b>{{ user.user_location }}</br>
   <b>Member Since: </b>{{ user.member_since }}</br>
 </ul>
+{% else %}
+<br>
+<br>
+{% endif %}
 
 <h3>Favorite NBA Teams</h3>
 <ul>
