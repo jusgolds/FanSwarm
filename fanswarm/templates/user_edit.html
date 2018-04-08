@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- document get the leagues and the teams fields and add a handler to leages to get
-run the snippet that heather sent on click !-->
-
-<!-- read through about static files in django cuz gotta grab the static root !-->
 
 <h1>Update</h1>
 
@@ -13,4 +9,26 @@ run the snippet that heather sent on click !-->
     {{ form.as_p }}
     <input type="submit" value="Update" />
 
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+(function() {
+  const userEditForm = $('.user-edit-form [name=leagues]')
+
+  function userEditUpdateSelected(el) {
+    const selected = $(el).find('option:selected').text();
+    const option = '.user-edit-form [name=favorite_teams] > option';
+    $(option + '[data-league=' + selected + ']').show();
+    $(option + ':not([data-league=' + selected + '])').hide();
+  }
+
+  userEditUpdateSelected(userEditForm);
+
+  userEditForm.change(function() {
+      userEditUpdateSelected(this);
+  });
+})();
+</script>
 {% endblock %}

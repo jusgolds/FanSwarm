@@ -4,9 +4,34 @@
 
 <h1>Create Event</h1>
 
-<form action="" method="post">{% csrf_token %}
+<form class="create-event-form" action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save" />
 </form>
 
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+(function() {
+  const eventCreateForm = $('.create-event-form [name=team_league]')
+
+  function eventCreateUpdateSelected(el) {
+    const selected = $(el).find('option:selected').text();
+    const fan_option = '.create-event-form [name=fan_team] > option';
+    const opp_option = '.create-event-form [name=opp_team] > option';
+    $(fan_option + '[data-league=' + selected + ']').show();
+    $(fan_option + ':not([data-league=' + selected + '])').hide();
+    $(opp_option + '[data-league=' + selected + ']').show();
+    $(opp_option + ':not([data-league=' + selected + '])').hide();
+  }
+
+  eventCreateUpdateSelected(eventCreateForm);
+
+  eventCreateForm.change(function() {
+      eventCreateUpdateSelected(this);
+  });
+})();
+</script>
 {% endblock %}
