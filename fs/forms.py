@@ -110,7 +110,7 @@ class TimeInput(forms.TimeInput):
     input_type = 'time'
 
 class UserEditForm(forms.ModelForm):
-    leagues = forms.ModelChoiceField(queryset=League.objects.all())
+    leagues = forms.ModelChoiceField(queryset=League.objects.all(), empty_label=None)
     favorite_teams = TeamMultipleChoiceField(queryset=Team.objects.all(), widget=CustomSelectMultiple())
 
     class Meta:
