@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.forms.widgets import Select, SelectMultiple
 
-from .models import Team, User, Event, League
+from .models import Team, User, Event, EventAttendance, League
 from .forms import UserEditForm, EventCreateForm, EventEditForm
 
 import datetime
@@ -91,6 +91,12 @@ class EventListView(ListView):
 
 class EventDetailView(DetailView):
     model = Event
+    slug_field = 'id'
+    slug_url_kwarg = 'event_id'
+
+class EventRSVPDetailView(DetailView):
+    template_name = 'event_rsvp.html'
+    model = EventAttendance
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
 
