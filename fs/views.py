@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, CreateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.forms.widgets import Select, SelectMultiple
@@ -74,7 +74,6 @@ class EventCreateView(CreateView):
     model = Event
     form_class = EventCreateForm
     template_name = 'create_event.html'
-    success_url = reverse_lazy('events')
 
     def get_form(self, *args, **kwargs):
         form = super(EventCreateView, self).get_form(*args, **kwargs)
@@ -83,9 +82,13 @@ class EventCreateView(CreateView):
 
     def form_valid(self, form):
         event = form.save(commit=False)
-        event.user = Event.objects.get(owner_id=self.request.user.pk)
+        event.owner = User.objects.get(id=self.request.user.pk)
         event.save()
-        return form
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, 'Event successfully added.')
+        return reverse_lazy('event-detail', kwargs={'event_id':self.kwargs['user_id']})
 
 class EventListView(ListView):
     template_name = 'events.html'
@@ -96,6 +99,7 @@ class EventListView(ListView):
     queryset = Event.objects.filter(event_date__gte=now).order_by('event_date')
 
 class EventDetailView(DetailView):
+    template_name = 'event_detail.html'
     model = Event
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
