@@ -84,11 +84,12 @@ class EventCreateView(CreateView):
         event = form.save(commit=False)
         event.owner = User.objects.get(id=self.request.user.pk)
         event.save()
-        return redirect(self.get_success_url())
+        return redirect(self.get_success_url(event_id=event.id))
 
-    def get_success_url(self):
+    def get_success_url(self, **kwargs):
         messages.add_message(self.request, messages.SUCCESS, 'Event successfully added.')
-        return reverse_lazy('event-detail', kwargs={'event_id':self.kwargs['user_id']})
+        print(kwargs)
+        return reverse('event-detail', kwargs={'event_id':kwargs['event_id']})
 
 class EventListView(ListView):
     template_name = 'events.html'
