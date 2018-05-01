@@ -13,10 +13,22 @@
 <a href="{% url 'event-edit' event_id=event.id %}">Edit</a>
 {% endif %}
 <br>
-{% if user.is_authenticated %}
-<a href="{% url 'event-rsvp' event_id=event.id %}">View RSVP List</a>
-{% endif %}
-<br>
 <a href="{% url 'events' %}">Back to Events</a>
+<br>
+{% if user.is_authenticated %}
+<br>
+<h4>Current Attendees</h4>
+<!-- <a href="{% url 'index' %}">RSVP</a> -->
+  <!-- <ul> -->
+    <!-- {% for user in user_list %} -->
+    <!-- {% for user in EventAttendance.user.all %} -->
+      <!-- <li>{{ user }}</li> -->
+    <!-- {% endfor %} -->
+    <!-- {% endfor %} -->
+  <!-- </ul> -->
+{% endif %}
+
+<!-- add a list of all the users who have rsvped -->
+<!-- add the button/form -->
 
 {% endblock %}

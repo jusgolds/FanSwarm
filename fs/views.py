@@ -84,6 +84,8 @@ class EventCreateView(CreateView):
         event = form.save(commit=False)
         event.owner = User.objects.get(id=self.request.user.pk)
         event.save()
+        ea = EventAttendance(event=event)
+        ea.save()
         return redirect(self.get_success_url(event_id=event.id))
 
     def get_success_url(self, **kwargs):
