@@ -16,16 +16,17 @@
 <a href="{% url 'events' %}">Back to Events</a>
 <br>
 {% if user.is_authenticated %}
+<form method="post" action="{% url 'event-rsvp' event_id=event.id %}">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">RSVP</button>
+</form>
 <br>
 <h4>Current Attendees</h4>
-<!-- <a href="{% url 'index' %}">RSVP</a> -->
-  <!-- <ul> -->
-    <!-- {% for user in user_list %} -->
-    <!-- {% for user in EventAttendance.user.all %} -->
-      <!-- <li>{{ user }}</li> -->
-    <!-- {% endfor %} -->
-    <!-- {% endfor %} -->
-  <!-- </ul> -->
+{% if attendees %}
+  {% for user in attendees %}
+  {{user}}
+  {% endfor %}
+{% endif %}
 {% endif %}
 
 <!-- add a list of all the users who have rsvped -->

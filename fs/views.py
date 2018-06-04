@@ -1,10 +1,12 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms.widgets import Select, SelectMultiple
+from django.views.generic.base import TemplateResponseMixin, View
 
 from .models import Team, User, Event, EventAttendance, League
 from .forms import UserEditForm, EventCreateForm, EventEditForm
@@ -107,11 +109,35 @@ class EventDetailView(DetailView):
     slug_field = 'id'
     slug_url_kwarg = 'event_id'
 
-class EventRSVPDetailView(DetailView):
-    template_name = 'event_rsvp.html'
-    model = EventAttendance
-    slug_field = 'id'
-    slug_url_kwarg = 'event_id'
+    def get_context_data(self, **kwargs):
+        context = super(EventDetailView, self).get_context_data(**kwargs)
+        try:
+            attendance = EventAttendance.objects.get(event_id=self.object.id)
+            context['attendees'] = attendance.user.all()
+        except EventAttendance.DoesNotExist:
+            pass
+        return context
+
+class EventRSVPView(LoginRequiredMixin, TemplateResponseMixin, View):
+    http_method_names = ['post']
+    model = Event
+
+    def post(self, *args, **kwargs):
+        event = self.get_object()
+        ea, _ = EventAttendance.objects.get_or_create(event=event)
+        ea.user.add(self.request.user)
+        ea.save()
+        messages.add_message(
+            self.request, messages.INFO,
+            'You have RSVP\'d to this event.'
+        )
+        return HttpResponseRedirect(self.get_redirect_url())
+
+    def get_object(self, queryset=None):
+        return Event.objects.get(id=self.kwargs['event_id'])
+
+    def get_redirect_url(self, **kwargs):
+        return reverse('event-detail', kwargs={'event_id':self.kwargs['event_id']})
 
 class EventEditView(UpdateView):
     model = Event

@@ -133,6 +133,6 @@ class Event(models.Model):
     bar = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name='bar')
 
 class EventAttendance(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None, related_name='attendance')
     user = models.ManyToManyField(User)
     # fan_group = models.ForeignKey(FanGroup, on_delete=models.CASCADE, blank=True)
