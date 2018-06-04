@@ -23,9 +23,11 @@
 <br>
 <h4>Current Attendees</h4>
 {% if attendees %}
+  <ul>
   {% for user in attendees %}
-  {{user}}
+  <li>{{user}}</li>
   {% endfor %}
+  </ul>
 {% endif %}
 {% endif %}
 
