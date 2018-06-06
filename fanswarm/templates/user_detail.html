@@ -16,7 +16,7 @@
 <br>
 {% endif %}
 
-<h3>Favorite NBA Teams</h3>
+<h5>Favorite NBA Teams</h5>
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 1 %}
@@ -25,7 +25,7 @@
   {% endfor %}
 </ul>
 
-<h3>Favorite NFL Teams</h3>
+<h5>Favorite NFL Teams</h5>
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 2 %}
@@ -34,7 +34,7 @@
   {% endfor %}
 </ul>
 
-<h3>Favorite MLB Teams</h3>
+<h5>Favorite MLB Teams</h5>
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 3 %}
@@ -43,7 +43,7 @@
   {% endfor %}
 </ul>
 
-<h3>Favorite NHL Teams</h3>
+<h5>Favorite NHL Teams</h5>
 <ul>
   {% for team in user.favorite_teams.all %}
   {% if team.team_sport_id == 4 %}
